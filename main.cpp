@@ -1,24 +1,26 @@
 #include "Candidate.h"
 #include "Examiner.h"
 #include <iostream>
+#include <vector>
 
 int main() {
 
-    Candidate c1("CND-001", "Bob", 85);
-    JuniorExaminer j1("JNR-001", "Charles");
-    SeniorExaminer s1("SNR-001", "Diana");
+    std::vector<User*> userList;
 
-    std::cout << "Initial state of Candidate:" << std::endl;
-    c1.display();
+    userList.push_back(new Candidate("CND-001", "Bob", 85));
+    userList.push_back(new JuniorExaminer("JNR-001", "Charles"));
+    userList.push_back(new SeniorExaminer("SNR-001", "Diana"));
 
-    std::cout << "\n--- Junior review (no change) ---" << std::endl;
-    j1.reviewCandidate(c1);
-    c1.display();
+    std::cout << "--- Calling virtual display() method ---" << std::endl;
+    for (const auto& user : userList) {
+        user->display();
+    }
 
-    std::cout << "\n--- Senior review (marks will change) ---" << std::endl;
-    s1.reviewCandidate(c1);
-    c1.display();
-    
-    std::cout << "\nMain function is ending." << std::endl;
+    std::cout << "\n--- Cleaning up memory ---" << std::endl;
+    for (auto& user : userList) {
+        delete user;
+    }
+    userList.clear();
+
     return 0;
 }
