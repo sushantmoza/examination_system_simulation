@@ -12,3 +12,17 @@ void Candidate::display() const {
 int Candidate::getMarks() const {
     return marks;
 }
+
+Candidate::Candidate(const Candidate& other) : User(other.userID, other.name + "-copy") {
+    this->marks = 0;
+    std::cout << "CANDIDATE: Custom Copy Constructor Used." << std::endl;
+}
+
+Candidate& Candidate::operator=(const Candidate& other) {
+    std::cout << "CANDIDATE: Custom Assignment Operator Used." << std::endl;
+    if (this != &other) {
+        this->name = other.name;
+        this->marks = other.marks;
+    }
+    return *this;
+}

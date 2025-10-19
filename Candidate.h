@@ -13,4 +13,8 @@ public:
     int getMarks() const;
 
     friend class SeniorExaminer;
+
+    Candidate(const Candidate& other);
+
+    Candidate& operator=(const Candidate& other);
 };
