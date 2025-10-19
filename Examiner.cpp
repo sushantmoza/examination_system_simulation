@@ -1,24 +1,22 @@
 #include "Examiner.h"
 #include <iostream>
 
-Examiner::Examiner(const std::string& id, const std::string& name) : User(id, name) {}
+Examiner::Examiner(const std::string& id, const std::string& name, Role r) : User(id, name, r) {}
 
 JuniorExaminer::JuniorExaminer(const std::string& id, const std::string& name)
-    : Examiner(id, name) {}
+    : Examiner(id, name, Role::Junior) {}
 
 void JuniorExaminer::reviewCandidate(Candidate& c) const {
-    std::cout << "Junior Examiner " << this->name << " reviews " << c.getID()
-              << ". Marks seen: " << c.getMarks() << " (Read-only)." << std::endl;
+    std::cout << "Junior " << this->name << " reviews " << c.getName()
+              << ". Marks: " << c.getMarks() << " (Read-only)." << std::endl;
 }
 
-// --- Senior Examiner Implementation ---
 SeniorExaminer::SeniorExaminer(const std::string& id, const std::string& name)
-    : Examiner(id, name) {}
+    : Examiner(id, name, Role::Senior) {}
 
 void SeniorExaminer::reviewCandidate(Candidate& c) const {
-    std::cout << "Senior Examiner " << this->name << " reviews " << c.getID() << "." << std::endl;
-    
-    std::cout << "  > Marks changed from " << c.marks;
-    c.marks = 95; // Modify the private data
-    std::cout << " to " << c.marks << "." << std::endl;
+    std::cout << "Senior " << this->name << " reviews " << c.getName() << "." << std::endl;
+    std::cout << "  > Marks changed from " << c.getMarks();
+    c.marks = 95;
+    std::cout << " to " << c.getMarks() << "." << std::endl;
 }
