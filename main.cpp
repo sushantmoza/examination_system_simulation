@@ -1,13 +1,14 @@
-#include "User.h"
+#include "Candidate.h"
 #include <iostream>
 
 int main() {
 
-    User u1("USR-001", "Alice");
+    Candidate c1("CND-001", "Bob", 85);
+
+    std::cout << "Displaying candidate info:" << std::endl;
+    c1.display();
     
-    std::cout << "Displaying user info:" << std::endl;
-    u1.display();
-    std::cout << std::endl;
+    // c1.marks = 90; 
 
     std::cout << "\nMain function is ending." << std::endl;
     return 0;
