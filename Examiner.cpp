@@ -17,6 +17,6 @@ SeniorExaminer::SeniorExaminer(const std::string& id, const std::string& name)
 void SeniorExaminer::reviewCandidate(Candidate& c) const {
     std::cout << "Senior " << this->name << " reviews " << c.getName() << "." << std::endl;
     std::cout << "  > Marks changed from " << c.getMarks();
-    c.marks = 95;
+    c.marks = 98;
     std::cout << " to " << c.getMarks() << "." << std::endl;
 }
