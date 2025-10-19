@@ -2,25 +2,20 @@
 #include "Examiner.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 int main() {
 
-    std::vector<User*> userList;
+    std::vector<std::unique_ptr<User>> userRegistry;
 
-    userList.push_back(new Candidate("CND-001", "Bob", 85));
-    userList.push_back(new JuniorExaminer("JNR-001", "Charles"));
-    userList.push_back(new SeniorExaminer("SNR-001", "Diana"));
-
-    std::cout << "--- Calling virtual display() method ---" << std::endl;
-    for (const auto& user : userList) {
-        user->display();
+    userRegistry.push_back(std::make_unique<Candidate>("CND-001", "Bob", 85));
+    userRegistry.push_back(std::make_unique<JuniorExaminer>("JNR-001", "Charles"));
+    
+    std::cout << "--- Displaying users from smart pointers ---" << std::endl;
+    for (const auto& userPtr : userRegistry) {
+        userPtr->display();
     }
-
-    std::cout << "\n--- Cleaning up memory ---" << std::endl;
-    for (auto& user : userList) {
-        delete user;
-    }
-    userList.clear();
-
+    
+    std::cout << "\n--- Main is ending, memory will be cleaned up automatically ---" << std::endl;
     return 0;
 }
