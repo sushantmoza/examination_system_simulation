@@ -9,14 +9,14 @@
 
 void processRawUserData(void* data) {
     std::cout << "\n Explicit Cast Demo: Processing raw data..." << std::endl;
-    User* user = static_cast<User*>(data);
+    User* user = static_cast<User*>(data);  // Explicit cast from void* to User*
     std::cout << "  > Data processed for user: ";
     user->display();
     std::cout << std::endl;
 }
 
 int main() {
-    std::vector<std::unique_ptr<User>> registry;
+    std::vector<std::unique_ptr<User>> registry;    // Using STL vector with smart pointers
 
     registry.push_back(std::make_unique<Candidate>("CND-102", "Grace", 88));
     registry.push_back(std::make_unique<FinalReviewer>("FIN-001", "Heidi"));
@@ -36,7 +36,7 @@ int main() {
 
     std::sort(registry.begin(), registry.end(), [](const auto& a, const auto& b) {
         return *a < *b;
-    });
+    });     // Using STL sort algorithm
 
     std::cout << "\nRegistry after sorting by ID:" << std::endl;
     for(const auto& user : registry) { user->display(); }
